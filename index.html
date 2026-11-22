@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kortex | Innovación Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* PALETA VIBRANTE */
+            --bg-dark: #0a0618;
+            --bg-card: #150a2e;
+            --bg-card-hover: #1e1040;
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --accent-light: #22d3ee;
+            --highlight: #f97316;
+            --text-light: #f8fafc;
+            --text-muted: #a1a1aa;
+            --border-subtle: rgba(139, 92, 246, 0.2);
+            --gradient-vibrant: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #06b6d4 100%);
+            --gradient-warm: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            background: rgba(10, 6, 24, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo img { 
+            height: 70px; 
+            width: auto;
+            mix-blend-mode: screen; 
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px; left: 0;
+            width: 0; height: 2px;
+            background: var(--gradient-vibrant);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text-light); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 12rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -10%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.45), transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            animation: flotarOrbe 12s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%; left: -10%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.35), transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            animation: flotarOrbe 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes flotarOrbe {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        .hero .container { position: relative; z-index: 2; }
+
+        .hero-logo {
+            max-width: 320px;
+            margin: 0 auto 1.5rem;
+            display: block;
+            mix-blend-mode: screen;
+            animation: flotarLogo 4s ease-in-out infinite;
+        }
+
+        @keyframes flotarLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            background: var(--gradient-vibrant);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .eslogan {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--accent-light);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-vibrant);
+            background-size: 200% 200%;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn:hover {
+            background-position: 100% 50%;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(236, 72, 153, 0.5);
+        }
+
+        /* --- SECCIONES --- */
+        section { padding: 6rem 0; position: relative; }
+
+        .section-header { text-align: center; margin-bottom: 4rem; }
+
+        .section-header h2 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-header h2 span {
+            background: var(--gradient-vibrant);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- SERVICIOS --- */
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .servicio-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servicio-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--gradient-vibrant);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .servicio-card:hover::before { transform: scaleX(1); }
+
+        .servicio-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .servicio-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .servicio-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- PROYECTOS / CARRUSEL --- */
+        .carrusel-wrapper {
+            position: relative;
+            padding: 0 3.5rem;
+        }
+
+        .carrusel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2rem 0.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+            scroll-behavior: smooth;
+        }
+
+        .carrusel::-webkit-scrollbar { height: 8px; }
+        .carrusel::-webkit-scrollbar-track { background: rgba(139, 92, 246, 0.1); border-radius: 4px; }
+        .carrusel::-webkit-scrollbar-thumb {
+            background: var(--gradient-vibrant);
+            border-radius: 4px;
+        }
+
+        .proyecto-card {
+            flex: 0 0 min(420px, 85vw);
+            scroll-snap-align: center;
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        @media (hover: hover) {
+            .proyecto-card:hover {
+                transform: translateY(-10px) scale(1.02);
+                border-color: var(--primary);
+                box-shadow:
+                    0 25px 50px rgba(139, 92, 246, 0.35),
+                    0 0 80px rgba(236, 72, 153, 0.15);
+            }
+            .proyecto-card:hover .video-overlay { opacity: 0.15; }
+            .proyecto-card:hover .play-icon { transform: scale(1.15); }
+        }
+
+        .proyecto-card.playing {
+            border-color: var(--secondary);
+            box-shadow: 0 0 60px rgba(236, 72, 153, 0.4);
+        }
+
+        .video-wrap {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(10, 6, 24, 0.1) 0%, rgba(10, 6, 24, 0.75) 100%);
+            opacity: 0.9;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .proyecto-card.playing .video-overlay { opacity: 0; }
+
+        .play-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--gradient-vibrant);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.7);
+            transition: transform 0.3s;
+            padding-left: 6px;
+        }
+
+        .proyecto-info { padding: 1.75rem 2rem 2rem; }
+
+        .proyecto-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-light);
+        }
+
+        .proyecto-info .cliente {
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--gradient-warm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.9rem;
+        }
+
+        .proyecto-info p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        .tag {
+            background: rgba(139, 92, 246, 0.12);
+            color: var(--primary-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .carrusel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+        }
+
+        .carrusel-btn:hover {
+            background: var(--gradient-vibrant);
+            border-color: transparent;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .carrusel-btn.prev { left: 0; }
+        .carrusel-btn.next { right: 0; }
+
+        .carrusel-hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        .carrusel-hint strong {
+            background: var(--gradient-vibrant);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* --- METODOLOGÍA --- */
+        .metodologia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .metodo-paso {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .metodo-paso:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.2);
+        }
+
+        .metodo-numero {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient-vibrant);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: absolute;
+            top: 0.5rem; right: 1.5rem;
+            line-height: 1;
+            opacity: 0.3;
+        }
+
+        .metodo-paso h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .metodo-paso p { color: var(--text-muted); font-size: 0.92rem; }
+
+        /* --- HISTORIA / QUIÉNES SOMOS --- */
+        .historia-container {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(236, 72, 153, 0.08) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 5rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .historia-texto {
+            flex: 1.5;
+        }
+
+        .historia-texto h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .historia-texto h3 span {
+            background: var(--gradient-warm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .historia-texto p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .historia-stats {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border-left: 2px solid var(--border-subtle);
+            padding-left: 3rem;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-vibrant);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .stat-item p {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* --- EQUIPO --- */
+        .equipo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .miembro-card {
+            background: var(--bg-card);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .miembro-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 30px rgba(236, 72, 153, 0.2);
+        }
+
+        .miembro-avatar {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            padding: 3px;
+            background: var(--gradient-vibrant);
+        }
+
+        .miembro-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--bg-card);
+        }
+
+        .miembro-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-light);
+        }
+
+        .miembro-card .rol {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .miembro-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;}
+
+        .miembro-contacto {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .miembro-contacto a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .miembro-contacto a:hover {
+            background: var(--gradient-vibrant);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- CTA / CONTACTO EMPRESA --- */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.15) 50%, rgba(6, 182, 212, 0.15) 100%);
+            padding: 6rem 2rem;
+            border-top: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.25), transparent 60%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .cta-section > .container { position: relative; z-index: 2; }
+
+        .contacto-box {
+            background: var(--bg-card);
+            border-radius: 24px;
+            border: 1px solid var(--border-subtle);
+            padding: 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .contacto-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-weight: 800;
+        }
+
+        .contacto-box p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contacto-box strong {
+            background: var(--gradient-vibrant);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .contacto-item {
+            background: rgba(139, 92, 246, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contacto-item span.icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contacto-item h4 {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .contacto-item a, .contacto-item p {
+            color: var(--accent-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .contacto-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050210;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        footer img {
+            height: 60px;
+            margin-bottom: 1rem;
+            mix-blend-mode: screen;
+            opacity: 0.8;
+        }
+
+        footer p { color: var(--text-muted); font-size: 0.85rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .eslogan { font-size: 1.1rem; }
+            .nav-links { display: none; }
+            .section-header h2 { font-size: 2rem; }
+            .carrusel-wrapper { padding: 0 0.5rem; }
+            .carrusel-btn { display: none; }
+            
+            .contacto-box { padding: 2rem; }
+            .contacto-box h2 { font-size: 1.8rem; }
+            .contacto-grid { grid-template-columns: 1fr; }
+            
+            .historia-container {
+                flex-direction: column;
+                padding: 2rem;
+                gap: 2rem;
+            }
+            
+            .historia-stats {
+                border-left: none;
+                border-top: 1px solid var(--border-subtle);
+                padding-left: 0;
+                padding-top: 2rem;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <div class="container nav-content">
+            <div class="nav-logo">
+                <img src="logo.png" alt="Kortex Logo">
+            </div>
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#equipo">Nosotros</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="inicio" class="hero">
+        <div class="container">
+            <img src="logo.png" alt="Kortex Logo" class="hero-logo">
+            <h1>KORTEX</h1>
+            <p class="eslogan">"Lo imaginas y nosotros lo hacemos realidad"</p>
+            <p>Estudio de software dedicado a crear soluciones digitales que impulsan tu negocio. Conectamos ideas, tecnología y talento para llevarte al siguiente nivel.</p>
+            <a href="#contacto" class="btn">Iniciar Proyecto</a>
+        </div>
+    </header>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros <span>Servicios</span></h2>
+                <p>Soluciones tecnológicas diseñadas para resolver problemas reales y generar impacto.</p>
+            </div>
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <span class="servicio-icon">💻</span>
+                    <h3>Desarrollo Web & Móvil</h3>
+                    <p>Aplicaciones robustas y escalables. Desde sitios corporativos hasta apps nativas e híbridas con las últimas tecnologías.</p>
+                </div>
+                <div class="servicio-card">
+                    <span class="servicio-icon">⚙️</span>
+                    <h3>Software a Medida</h3>
+                    <p>Diseñamos y desarrollamos sistemas personalizados que se adaptan perfectamente a tus procesos operativos.</p>
+                </div>
+                <div class="servicio-card">
+                    <span class="servicio-icon">☁️</span>
+                    <h3>Consultoría & Cloud</h3>
+                    <p>Migración a la nube, optimización de infraestructura y arquitectura de software para escalar de forma segura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS (CARRUSEL CON VIDEOS) -->
+    <section id="proyectos">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros <span>Proyectos</span></h2>
+                <p>Explora nuestras soluciones en acción a través de demos reales.</p>
+            </div>
+
+            <div class="carrusel-wrapper">
+                <button class="carrusel-btn prev" aria-label="Anterior">‹</button>
+
+                <div class="carrusel" id="carruselProyectos">
+
+                    <!-- Proyecto 1: Turnos IES -->
+                    <article class="proyecto-card" data-video>
+                        <div class="video-wrap">
+                            <video src="turnos-ies-demo.mp4" muted loop playsinline preload="metadata"></video>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
+                        </div>
+                        <div class="proyecto-info">
+                            <h3>Gestión de Turnos y Espacios</h3>
+                            <span class="cliente">Instituto Nuevo Horizonte</span>
+                            <p>Sistema integral para la reserva y administración de turnos de espacios físicos y equipamientos.</p>
+                            <div class="tags">
+                                <span class="tag">Laravel</span>
+                                <span class="tag">MySQL</span>
+                                <span class="tag">Bootstrap</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 2: SGEJ -->
+                    <article class="proyecto-card" data-video>
+                        <div class="video-wrap">
+                            <video src="SGEJ_video_presentacion.mp4" muted loop playsinline preload="metadata"></video>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
+                        </div>
+                        <div class="proyecto-info">
+                            <h3>Sistema de Pruebas Académicas</h3>
+                            <span class="cliente">Técnico Jurídico</span>
+                            <p>Plataforma de evaluación en línea con creación de exámenes, corrección automática y seguimiento del rendimiento.</p>
+                            <div class="tags">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">MySQL</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 3: DentaSys -->
+                    <article class="proyecto-card" data-video>
+                        <div class="video-wrap">
+                            <video src="DentaSys_demo.mp4" muted loop playsinline preload="metadata"></video>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
+                        </div>
+                        <div class="proyecto-info">
+                            <h3>DentaSys | Gestión Odontológica</h3>
+                            <span class="cliente">Clínicas Odontológicas</span>
+                            <p>Software de gestión completo: historia clínica digital, turnos, facturación y control de inventario de insumos.</p>
+                            <div class="tags">
+                                <span class="tag">Laravel</span>
+                                <span class="tag">MySQL</span>
+                                <span class="tag">API REST</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 4: SRIT -->
+                    <article class="proyecto-card" data-video>
+                        <div class="video-wrap">
+                            <video src="SRIT_video_presentacion.mp4" muted loop playsinline preload="metadata"></video>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
+                        </div>
+                        <div class="proyecto-info">
+                            <h3>Sistema de Reservas e Itinerarios</h3>
+                            <span class="cliente">Explora Travel</span>
+                            <p>Plataforma de reservas turísticas con gestión de itinerarios, pagos en línea y panel administrativo.</p>
+                            <div class="tags">
+                                <span class="tag">Laravel</span>
+                                <span class="tag">Vue.js</span>
+                                <span class="tag">MySQL</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <button class="carrusel-btn next" aria-label="Siguiente">›</button>
+            </div>
+
+            <p class="carrusel-hint">
+                💡 <strong>Pasa el cursor</strong> para previsualizar · <strong>Haz clic</strong> para reproducir con sonido
+            </p>
+        </div>
+    </section>
+
+    <!-- METODOLOGÍA -->
+    <section id="metodologia">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestro <span>Método</span></h2>
+                <p>Un proceso probado para transformar ideas en productos digitales exitosos.</p>
+            </div>
+            <div class="metodologia-grid">
+                <div class="metodo-paso">
+                    <span class="metodo-numero">01</span>
+                    <h3>Ideación y Descubrimiento</h3>
+                    <p>Nos sumergimos en tu negocio, usuarios y objetivos para definir el alcance y validar las suposiciones.</p>
+                </div>
+                <div class="metodo-paso">
+                    <span class="metodo-numero">02</span>
+                    <h3>Diseño con Intención</h3>
+                    <p>Creamos prototipos y validamos flujos de usuario para convertir ideas complejas en experiencias intuitivas.</p>
+                </div>
+                <div class="metodo-paso">
+                    <span class="metodo-numero">03</span>
+                    <h3>Ingeniería que Escala</h3>
+                    <p>Construimos con código limpio y arquitecturas modernas, priorizando la mantenibilidad y el rendimiento.</p>
+                </div>
+                <div class="metodo-paso">
+                    <span class="metodo-numero">04</span>
+                    <h3>Calidad como Mentalidad</h3>
+                    <p>Combinamos pruebas automatizadas y validación manual para garantizar lanzamientos estables.</p>
+                </div>
+                <div class="metodo-paso">
+                    <span class="metodo-numero">05</span>
+                    <h3>Lanzamiento con Confianza</h3>
+                    <p>Nos encargamos de la infraestructura y el despliegue para que tu producto salga al mercado de forma fluida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORIA Y EQUIPO -->
+    <section id="equipo">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quiénes <span>Somos</span></h2>
+                <p>Conoce nuestra historia y al equipo detrás de Kortex.</p>
+            </div>
+
+            <!-- NUEVA SECCIÓN DE HISTORIA -->
+            <div class="historia-container">
+                <div class="historia-texto">
+                    <h3>Nacidos en <span>Jujuy, Argentina</span></h3>
+                    <p>Kortex no nació en una gran oficina corporativa, sino entre café, mates y líneas de código en la provincia de Jujuy. Un grupo de amigos y colegas desarrolladores de software, con distintas especialidades pero una misma pasión, decidió unir fuerzas para crear algo propio.</p>
+                    <p>Cansados de ver cómo el talento del norte argentino migraba a las grandes capitales, fundamos esta startup con una convicción clara: <strong>se puede hacer software de primer nivel desde cualquier lugar del mundo</strong>, manteniendo la calidez y el compromiso que nos caracteriza.</p>
+                    <p>Hoy, somos un equipo integral de ingenieros dedicados a resolver problemas complejos con soluciones simples, elegantes y escalables.</p>
+                </div>
+                <div class="historia-stats">
+                    <div class="stat-item">
+                        <h4>100%</h4>
+                        <p>Talento Jujeño</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>4+</h4>
+                        <p>Especialistas en Desarrollo</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>100%</h4>
+                        <p>Compromiso con el Cliente</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EQUIPO (TODOS DESARROLLADORES) -->
+            <div class="equipo-grid">
+                <!-- Integrante 1 -->
+                <div class="miembro-card">
+                    <div class="miembro-avatar"><img src="yo.png" alt="Alejandro Lopez"></div>
+                    <h4>Alejandro Lopez</h4>
+                    <span class="rol">Fullstack Developer</span>
+                    <p>Arquitecto de software. Especialista en conectar el frontend con la lógica del backend para crear sistemas robustos.</p>
+                    <div class="miembro-contacto">
+                        <a href="mailto:alejandro@kortex.com" title="Enviar correo">✉️</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                        <a href="#" title="GitHub">🐙</a>
+                    </div>
+                </div>
+                <!-- Integrante 2 -->
+                <div class="miembro-card">
+                    <div class="miembro-avatar"><img src="lea.png" alt="Leandro Moreno"></div>
+                    <h4>Leandro Moreno</h4>
+                    <span class="rol">Frontend & UI Developer</span>
+                    <p>Experto en experiencia de usuario. Transforma los diseños en interfaces rápidas, accesibles y visualmente impactantes.</p>
+                    <div class="miembro-contacto">
+                        <a href="mailto:leandro@kortex.com" title="Enviar correo">✉️</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                        <a href="#" title="GitHub">🐙</a>
+                    </div>
+                </div>
+                <!-- Integrante 3 -->
+                <div class="miembro-card">
+                    <div class="miembro-avatar"><img src="wilson.png" alt="Gonzalo Narvaez"></div>
+                    <h4>Gonzalo Narvaez</h4>
+                    <span class="rol">Backend & Data Developer</span>
+                    <p>Especialista en bases de datos y lógica de servidor. Se asegura de que los datos estén seguros y el sistema sea veloz.</p>
+                    <div class="miembro-contacto">
+                        <a href="mailto:gonzalo@kortex.com" title="Enviar correo">✉️</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                        <a href="#" title="GitHub">🐙</a>
+                    </div>
+                </div>
+                <!-- Integrante 4 -->
+                <div class="miembro-card">
+                    <div class="miembro-avatar"><img src="jona.png" alt="Jonatan Subelza"></div>
+                    <h4>Jonatan Subelza</h4>
+                    <span class="rol">QA & DevOps Developer</span>
+                    <p>Guardián de la calidad. Automatiza pruebas y gestiona el despliegue continuo para que cada lanzamiento sea perfecto.</p>
+                    <div class="miembro-contacto">
+                        <a href="mailto:jonatan@kortex.com" title="Enviar correo">✉️</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                        <a href="#" title="GitHub">🐙</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO EMPRESA -->
+    <section class="cta-section" id="contacto">
+        <div class="container">
+            <div class="contacto-box">
+                <h2>¿Tienes una idea en mente?</h2>
+                <p>Recuerda: <strong>"Lo imaginas y nosotros lo hacemos realidad"</strong>. Cuéntanos tu proyecto y te ayudaremos a llevarlo al siguiente nivel.</p>
+                
+                <div class="contacto-grid">
+                    <div class="contacto-item">
+                        <span class="icon">📧</span>
+                        <h4>Escríbenos</h4>
+                        <a href="mailto:hola@kortex.com">hola@kortex.com</a>
+                    </div>
+                    <div class="contacto-item">
+                        <span class="icon">📞</span>
+                        <h4>Llámanos</h4>
+                        <!-- Código de área de Jujuy: 388 -->
+                        <a href="tel:+543881234567">+54 388 123-4567</a>
+                    </div>
+                    <div class="contacto-item">
+                        <span class="icon">📍</span>
+                        <h4>Ubicación</h4>
+                        <p>San Salvador de Jujuy, Argentina</p>
+                    </div>
+                </div>
+
+                <a href="mailto:hola@kortex.com" class="btn">Contáctanos Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <img src="logo.png" alt="Kortex Logo">
+            <p>© 2024 Kortex - Innovación Digital. Todos los derechos reservados.</p>
+            <p>Contacto: hola@kortex.com | +54 388 123-4567 | Jujuy, Argentina</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SCROLL SUAVE =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // ===== CARRUSEL: FLECHAS =====
+        const carrusel = document.getElementById('carruselProyectos');
+
+        document.querySelector('.carrusel-btn.prev').addEventListener('click', () => {
+            const card = carrusel.querySelector('.proyecto-card');
+            const scrollAmount = card ? card.offsetWidth + 32 : 400;
+            carrusel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        document.querySelector('.carrusel-btn.next').addEventListener('click', () => {
+            const card = carrusel.querySelector('.proyecto-card');
+            const scrollAmount = card ? card.offsetWidth + 32 : 400;
+            carrusel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        // ===== LÓGICA DE VIDEOS: HOVER PREVIEW + CLICK PLAY =====
+        const cards = document.querySelectorAll('.proyecto-card[data-video]');
+
+        function pausarTodos(excepto = null) {
+            cards.forEach(card => {
+                if (card === excepto) return;
+                const v = card.querySelector('video');
+                if (v.dataset.userPlaying === 'true') {
+                    v.pause();
+                    v.controls = false;
+                    v.muted = true;
+                    delete v.dataset.userPlaying;
+                    card.classList.remove('playing');
+                }
+            });
+        }
+
+        cards.forEach(card => {
+            const video = card.querySelector('video');
+
+            card.addEventListener('mouseenter', () => {
+                if (!video.dataset.userPlaying) {
+                    video.play().catch(() => {});
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (!video.dataset.userPlaying) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+
+            card.addEventListener('click', (e) => {
+                if (e.target.tagName === 'VIDEO' && video.controls) return;
+
+                if (video.dataset.userPlaying === 'true') {
+                    video.pause();
+                    video.controls = false;
+                    video.muted = true;
+                    delete video.dataset.userPlaying;
+                    card.classList.remove('playing');
+                } else {
+                    pausarTodos(card);
+                    video.muted = false;
+                    video.controls = true;
+                    video.play().catch(() => {});
+                    video.dataset.userPlaying = 'true';
+                    card.classList.add('playing');
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                video.controls = false;
+                video.muted = true;
+                video.currentTime = 0;
+                delete video.dataset.userPlaying;
+                card.classList.remove('playing');
+            });
+        });
+    </script>
+</body>
+</html>
