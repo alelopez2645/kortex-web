@@ -306,13 +306,8 @@
                     0 25px 50px rgba(139, 92, 246, 0.35),
                     0 0 80px rgba(236, 72, 153, 0.15);
             }
-            .proyecto-card:hover .video-overlay { opacity: 0.15; }
+            .proyecto-card:hover .video-overlay { opacity: 0.6; }
             .proyecto-card:hover .play-icon { transform: scale(1.15); }
-        }
-
-        .proyecto-card.playing {
-            border-color: var(--secondary);
-            box-shadow: 0 0 60px rgba(236, 72, 153, 0.4);
         }
 
         .video-wrap {
@@ -322,11 +317,13 @@
             overflow: hidden;
         }
 
-        .video-wrap video {
+        .video-wrap iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
+            border: none;
+            position: absolute;
+            top: 0; left: 0;
+            pointer-events: none; /* Desactiva los clics en el iframe para que podamos capturarlos en el div de arriba */
         }
 
         .video-overlay {
@@ -335,14 +332,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(180deg, rgba(10, 6, 24, 0.1) 0%, rgba(10, 6, 24, 0.75) 100%);
+            background: linear-gradient(180deg, rgba(10, 6, 24, 0.4) 0%, rgba(10, 6, 24, 0.8) 100%);
             opacity: 0.9;
-            transition: opacity 0.3s;
-            pointer-events: none;
+            transition: all 0.3s;
             z-index: 2;
         }
-
-        .proyecto-card.playing .video-overlay { opacity: 0; }
 
         .play-icon {
             width: 72px;
@@ -746,6 +740,67 @@
 
         footer p { color: var(--text-muted); font-size: 0.85rem; }
 
+        /* --- MODAL (LIGHTBOX) PARA VIDEOS --- */
+        .modal-video {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-video.active {
+            display: flex;
+        }
+
+        .modal-contenido {
+            position: relative;
+            width: 80vw; /* Ocupa el 80% del ancho de la pantalla */
+            max-width: 1000px; /* Límite máximo */
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.3);
+            border: 1px solid var(--primary);
+            animation: aparecer 0.3s ease-out;
+        }
+
+        @keyframes aparecer {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-contenido iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-cerrar {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .btn-cerrar:hover {
+            color: var(--secondary);
+            transform: scale(1.2);
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
@@ -773,6 +828,10 @@
                 flex-direction: row;
                 justify-content: space-around;
                 width: 100%;
+            }
+
+            .modal-contenido {
+                width: 95vw; /* En celulares ocupa casi todo el ancho */
             }
         }
     </style>
@@ -847,18 +906,12 @@
                 <div class="carrusel" id="carruselProyectos">
 
                     <!-- Proyecto 1: Turnos IES -->
-                    <article class="proyecto-card" data-video>
+                    <article class="proyecto-card">
                         <div class="video-wrap">
-                            <iframe 
-                                width="100%" 
-                                height="100%" 
-                                src="https://youtu.be/ojknoGgAmWE" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                            </iframe>
+                            <iframe src="https://www.youtube.com/embed/ojknoGgAmWE" title="YouTube video player" allowfullscreen></iframe>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
                         </div>
                         <div class="proyecto-info">
                             <h3>Gestión de Turnos y Espacios</h3>
@@ -872,19 +925,13 @@
                         </div>
                     </article>
 
-                    <!-- Proyecto 2: SGEJ (Ahora con iframe de YouTube) -->
+                    <!-- Proyecto 2: SGEJ -->
                     <article class="proyecto-card">
                         <div class="video-wrap">
-                            <iframe 
-                                width="100%" 
-                                height="100%" 
-                                src="https://www.youtube.com/embed/ojknoGgAmWE" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                            </iframe>
+                            <iframe src="https://www.youtube.com/embed/ojknoGgAmWE" title="YouTube video player" allowfullscreen></iframe>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
                         </div>
                         <div class="proyecto-info">
                             <h3>Sistema de Pruebas Académicas</h3>
@@ -899,18 +946,12 @@
                     </article>
 
                     <!-- Proyecto 3: DentaSys -->
-                    <article class="proyecto-card" data-video>
-                         <div class="video-wrap">
-                            <iframe 
-                                width="100%" 
-                                height="100%" 
-                                src="hhttps://youtu.be/ojknoGgAmWE" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                            </iframe>
+                    <article class="proyecto-card">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/ojknoGgAmWE" title="YouTube video player" allowfullscreen></iframe>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
                         </div>
                         <div class="proyecto-info">
                             <h3>DentaSys | Gestión Odontológica</h3>
@@ -925,23 +966,17 @@
                     </article>
 
                     <!-- Proyecto 4: SRIT -->
-                    <article class="proyecto-card" data-video>
+                    <article class="proyecto-card">
                         <div class="video-wrap">
-                            <iframe 
-                                width="100%" 
-                                height="100%" 
-                                src="https://youtu.be/ojknoGgAmWE" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                            </iframe>
+                            <iframe src="https://www.youtube.com/embed/ojknoGgAmWE" title="YouTube video player" allowfullscreen></iframe>
+                            <div class="video-overlay">
+                                <div class="play-icon">▶</div>
+                            </div>
                         </div>
                         <div class="proyecto-info">
-                            <h3>Sistema de relevamiento de Infraestructura tecnologica</h3>
-                            <span class="cliente">Explora Travel</span>
-                            <p>Plataforma de relevamiento de infraestructura tecnologica de los organismos pertenecientes a la provincia de jujuy .</p>
+                            <h3>Sistema de Relevamiento de Infraestructura</h3>
+                            <span class="cliente">Gobierno de Jujuy</span>
+                            <p>Plataforma de relevamiento de infraestructura tecnológica de los organismos pertenecientes a la provincia de Jujuy.</p>
                             <div class="tags">
                                 <span class="tag">Laravel</span>
                                 <span class="tag">Vue.js</span>
@@ -956,7 +991,7 @@
             </div>
 
             <p class="carrusel-hint">
-                💡 <strong>Pasa el cursor</strong> para previsualizar · <strong>Haz clic</strong> para reproducir con sonido
+                💡 <strong>Haz clic en cualquier proyecto</strong> para ver el video en pantalla grande.
             </p>
         </div>
     </section>
@@ -1100,7 +1135,6 @@
                     <div class="contacto-item">
                         <span class="icon">📞</span>
                         <h4>Llámanos</h4>
-                        <!-- Código de área de Jujuy: 388 -->
                         <a href="tel:+543881234567">+54 388 123-4567</a>
                     </div>
                     <div class="contacto-item">
@@ -1123,6 +1157,14 @@
             <p>Contacto: hola@kortex.com | +54 388 123-4567 | Jujuy, Argentina</p>
         </div>
     </footer>
+
+    <!-- MODAL (LIGHTBOX) PARA LOS VIDEOS -->
+    <div id="videoModal" class="modal-video">
+        <div class="modal-contenido">
+            <button class="btn-cerrar" id="cerrarModal">&times;</button>
+            <div id="iframeContenedor" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
 
     <script>
         // ===== SCROLL SUAVE =====
@@ -1149,67 +1191,57 @@
             carrusel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
 
-        // ===== LÓGICA DE VIDEOS: HOVER PREVIEW + CLICK PLAY =====
-        // Nota: Esto solo afectará a los videos locales, ya que SGEJ ahora es un iframe.
-        const cards = document.querySelectorAll('.proyecto-card[data-video]');
+        // ===== LÓGICA DEL MODAL (EXPANDIR VIDEO) =====
+        const modal = document.getElementById('videoModal');
+        const iframeContenedor = document.getElementById('iframeContenedor');
+        const btnCerrar = document.getElementById('cerrarModal');
 
-        function pausarTodos(excepto = null) {
-            cards.forEach(card => {
-                if (card === excepto) return;
-                const v = card.querySelector('video');
-                if (v && v.dataset.userPlaying === 'true') {
-                    v.pause();
-                    v.controls = false;
-                    v.muted = true;
-                    delete v.dataset.userPlaying;
-                    card.classList.remove('playing');
-                }
+        // Escuchar clics en cada tarjeta de proyecto
+        document.querySelectorAll('.proyecto-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const iframeOriginal = card.querySelector('iframe');
+                if (!iframeOriginal) return;
+
+                // Obtener el src del iframe y agregar autoplay=1 para que suene al abrirse
+                let urlVideo = iframeOriginal.src;
+                urlVideo = urlVideo.includes('?') ? urlVideo + '&autoplay=1' : urlVideo + '?autoplay=1';
+
+                // Insertar el nuevo iframe en el modal
+                iframeContenedor.innerHTML = `
+                    <iframe src="${urlVideo}" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                `;
+
+                // Mostrar el modal
+                modal.classList.add('active');
             });
+        });
+
+        // Función para cerrar el modal y pausar el video
+        function cerrarModal() {
+            modal.classList.remove('active');
+            // Vaciar el contenedor para detener la reproducción del video
+            iframeContenedor.innerHTML = ''; 
         }
 
-        cards.forEach(card => {
-            const video = card.querySelector('video');
-            if (!video) return; // Seguridad extra por si acaso
+        // Cerrar al hacer clic en la "X"
+        btnCerrar.addEventListener('click', cerrarModal);
 
-            card.addEventListener('mouseenter', () => {
-                if (!video.dataset.userPlaying) {
-                    video.play().catch(() => {});
-                }
-            });
+        // Cerrar al hacer clic fuera del recuadro del video
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                cerrarModal();
+            }
+        });
 
-            card.addEventListener('mouseleave', () => {
-                if (!video.dataset.userPlaying) {
-                    video.pause();
-                    video.currentTime = 0;
-                }
-            });
-
-            card.addEventListener('click', (e) => {
-                if (e.target.tagName === 'VIDEO' && video.controls) return;
-
-                if (video.dataset.userPlaying === 'true') {
-                    video.pause();
-                    video.controls = false;
-                    video.muted = true;
-                    delete video.dataset.userPlaying;
-                    card.classList.remove('playing');
-                } else {
-                    pausarTodos(card);
-                    video.muted = false;
-                    video.controls = true;
-                    video.play().catch(() => {});
-                    video.dataset.userPlaying = 'true';
-                    card.classList.add('playing');
-                }
-            });
-
-            video.addEventListener('ended', () => {
-                video.controls = false;
-                video.muted = true;
-                video.currentTime = 0;
-                delete video.dataset.userPlaying;
-                card.classList.remove('playing');
-            });
+        // Cerrar al presionar la tecla "Escape"
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                cerrarModal();
+            }
         });
     </script>
 </body>
