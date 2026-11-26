@@ -243,6 +243,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 0.5rem;
             background: rgba(255, 255, 255, 0.03);
             color: var(--text-light);
             padding: 0.95rem 2rem;
@@ -537,58 +538,75 @@
             background-clip: text;
         }
 
-        /* --- METODOLOGÍA --- */
+        /* --- METODOLOGÍA (rediseñada: 3 arriba + 2 centradas abajo) --- */
         .metodologia-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(6, 1fr);
             gap: 1.75rem;
         }
 
         .metodo-paso {
+            grid-column: span 2;
             background: var(--bg-card);
             backdrop-filter: blur(12px);
-            padding: 2.25rem;
-            border-radius: 20px;
+            padding: 2rem 1.9rem 2.1rem;
+            border-radius: 22px;
             border: 1px solid var(--border-subtle);
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+        }
+
+        .metodo-paso:nth-child(4) { grid-column: 2 / span 2; }
+        .metodo-paso:nth-child(5) { grid-column: 4 / span 2; }
+
+        .metodo-paso::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--gradient-vibrant);
+            opacity: 0.55;
+            transition: opacity 0.3s ease;
         }
 
         .metodo-paso:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             background: var(--bg-card-hover);
             border-color: var(--accent);
             box-shadow: 0 15px 32px rgba(47, 123, 255, 0.18);
         }
 
+        .metodo-paso:hover::before { opacity: 1; }
+
         .metodo-numero {
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.2rem;
+            font-size: 1.35rem;
             font-weight: 800;
+            color: #02090c;
             background: var(--gradient-vibrant);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: absolute;
-            top: 0.5rem; right: 1.35rem;
-            line-height: 1;
-            opacity: 0.25;
+            box-shadow: 0 0 22px rgba(0, 255, 136, 0.35);
+            margin-bottom: 1.25rem;
         }
 
         .metodo-paso h3 {
-            font-size: 1.22rem;
+            font-size: 1.2rem;
             margin-bottom: 0.7rem;
             color: var(--text-light);
-            position: relative;
-            z-index: 1;
         }
 
         .metodo-paso p {
             color: var(--text-muted);
             font-size: 0.92rem;
-            position: relative;
-            z-index: 1;
         }
 
         /* --- HISTORIA / QUIÉNES SOMOS --- */
@@ -775,7 +793,7 @@
             border-radius: 24px;
             border: 1px solid var(--border-subtle);
             padding: 3.75rem;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
             box-shadow: 0 24px 55px rgba(0, 0, 0, 0.55);
@@ -804,35 +822,49 @@
             background-clip: text;
         }
 
+        /* 3 tarjetas iguales, alineadas en una sola fila */
         .contacto-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-bottom: 2.75rem;
-            text-align: left;
+            margin-bottom: 2rem;
+            align-items: stretch;
         }
 
         .contacto-item {
             background: rgba(0, 255, 136, 0.04);
-            padding: 1.5rem;
+            padding: 1.75rem 1.25rem;
             border-radius: 18px;
             border: 1px solid var(--border-subtle);
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
-            transition: border-color 0.25s ease;
+            align-items: center;
+            text-align: center;
+            gap: 0.45rem;
+            transition: all 0.25s ease;
         }
 
-        .contacto-item:hover { border-color: var(--border-strong); }
+        .contacto-item:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0, 229, 255, 0.14);
+        }
 
         .contacto-item span.icon {
-            font-size: 1.45rem;
-            margin-bottom: 0.35rem;
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 0.4rem;
         }
 
         .contacto-item h4 {
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 1.02rem;
         }
 
         .contacto-item a, .contacto-item p {
@@ -840,9 +872,38 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 0.94rem;
+            word-break: break-word;
+            margin: 0;
         }
 
         .contacto-item a:hover { text-decoration: underline; }
+
+        /* --- MAPA --- */
+        .mapa-wrap {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 16px 38px rgba(0, 229, 255, 0.14);
+            margin-bottom: 1.75rem;
+            background: #02080b;
+        }
+
+        .mapa-wrap iframe {
+            display: block;
+            width: 100%;
+            height: 340px;
+            border: 0;
+            /* Estilo oscuro acorde al sitio. Borra esta línea si prefieres el mapa con colores normales */
+            filter: invert(92%) hue-rotate(180deg) contrast(0.92) saturate(0.85);
+        }
+
+        .contacto-acciones {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
         /* --- FOOTER --- */
         footer {
@@ -927,6 +988,21 @@
         }
 
         /* --- RESPONSIVE --- */
+        @media (max-width: 960px) {
+            /* Método: 2 columnas, la quinta tarjeta centrada */
+            .metodologia-grid { grid-template-columns: repeat(2, 1fr); }
+            .metodo-paso,
+            .metodo-paso:nth-child(4),
+            .metodo-paso:nth-child(5) { grid-column: auto; }
+            .metodo-paso:nth-child(5) {
+                grid-column: 1 / -1;
+                justify-self: center;
+                width: calc(50% - 0.875rem);
+            }
+
+            .contacto-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+        }
+
         @media (max-width: 768px) {
             .hero { padding: 8.5rem 0 4.5rem; }
             .nav-links { display: none; }
@@ -935,8 +1011,12 @@
             .hero-actions { flex-direction: column; width: 100%; }
             .btn, .btn-outline { width: 100%; }
 
-            .contacto-box { padding: 2rem 1.5rem; }
-            .contacto-grid { grid-template-columns: 1fr; }
+            .metodologia-grid { grid-template-columns: 1fr; }
+            .metodo-paso:nth-child(5) { width: 100%; }
+
+            .contacto-box { padding: 2rem 1.25rem; }
+            .mapa-wrap iframe { height: 260px; }
+            .contacto-acciones { flex-direction: column; width: 100%; }
 
             .historia-container {
                 flex-direction: column;
@@ -1397,7 +1477,7 @@
                     <div class="contacto-item">
                         <span class="icon">📧</span>
                         <h4>Escríbenos</h4>
-                        <a href="mailto:kortexjujuy@gmail.com">kortexjujuy@gmail.com/a>
+                        <a href="mailto:kortexjujuy@gmail.com">kortexjujuy@gmail.com</a>
                     </div>
                     <div class="contacto-item">
                         <span class="icon">📞</span>
@@ -1406,12 +1486,25 @@
                     </div>
                     <div class="contacto-item">
                         <span class="icon">📍</span>
-                        <h4>Direccion</h4>
-                        <p>Manuel Castellano 3323 Barrio 47 Hectáreas (Alto Comedero)-San Salvador de Jujuy, Argentina</p>
+                        <h4>Dirección</h4>
+                        <p>Manuel Castellano 3323, Barrio 47 Hectáreas (Alto Comedero) - San Salvador de Jujuy, Argentina</p>
                     </div>
                 </div>
 
-                <a href="mailto:hola@kortex.com" class="btn">Contáctanos Ahora</a>
+                <!-- MAPA DE GOOGLE -->
+                <div class="mapa-wrap">
+                    <iframe
+                        src="https://www.google.com/maps?q=Manuel+Castellano+3323,+San+Salvador+de+Jujuy,+Jujuy,+Argentina&output=embed"
+                        title="Ubicación de Kortex en Google Maps"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <div class="contacto-acciones">
+                    <a href="mailto:kortexjujuy@gmail.com" class="btn">Contáctanos Ahora</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Manuel+Castellano+3323,+San+Salvador+de+Jujuy,+Jujuy,+Argentina" target="_blank" rel="noopener" class="btn-outline">📍 Cómo llegar</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1421,7 +1514,7 @@
         <div class="container">
             <img src="logo (1).png" alt="Kortex Logo">
             <p>© 2026 Kortex - Innovación Digital. Todos los derechos reservados.</p>
-            <p>Contacto: hola@kortex.com | +54 388 123-4567 | Jujuy, Argentina</p>
+            <p>Contacto: kortexjujuy@gmail.com | +54 388 519-8447 | Jujuy, Argentina</p>
         </div>
     </footer>
 
